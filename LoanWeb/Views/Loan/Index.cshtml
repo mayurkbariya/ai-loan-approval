@@ -1,0 +1,243 @@
+﻿@{
+    ViewData["Title"] = "Loan Risk Assessment";
+}
+
+<div class="hero-section text-center fade-in">
+    <div class="container">
+        <h1><i class="bi bi-shield-check me-3"></i>Loan Risk Assessment</h1>
+        <p class="mb-0">Enter loan details to get an AI-powered risk prediction</p>
+    </div>
+</div>
+
+<div class="container fade-in mb-1">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i>Application Details</h4>
+                </div>
+                <div class="card-body p-4">
+                    <!-- VALIDATION SUMMARY -->
+                    @* @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h5 class="alert-heading"><i class="bi bi-exclamation-triangle me-2"></i>Please Fix the Highlighted Errors</h5>
+                            <p class="mb-2">We found @ViewData.ModelState.ErrorCount issue(s) with your input. Please correct them below.</p>
+                            <hr class="bg-white" />
+                            <p class="mb-0">
+                                <strong>Required fixes:</strong>
+                                <ul class="mb-0 mt-2">
+                                    @foreach (var key in ViewData.ModelState.Keys)
+                                    {
+                                        var errors = ViewData.ModelState[key].Errors;
+                                        if (errors.Count > 0)
+                                        {
+                                            foreach (var error in errors)
+                                            {
+                                                <li>@error.ErrorMessage</li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </p>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    } *@
+
+                    <form asp-action="Predict" asp-controller="Loan" method="post">
+                        <div class="row">
+                            <!-- AGE FIELD -->
+                            <div class="col-md-6 mb-3">
+                                <label for="Age" class="form-label">
+                                    <i class="bi bi-person me-2"></i>Age <span class="text-danger">*</span>
+                                </label>
+                                @{
+                                    var ageHasError = ViewData.ModelState["Age"]?.Errors.Count > 0;
+                                }
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-calendar"></i></span>
+                                    <input type="number" 
+                                           class="form-control @(ageHasError ? "is-invalid" : "")" 
+                                           id="Age" 
+                                           name="Age" 
+                                           value="@(Model?.Age)"
+                                           placeholder="Enter your age (minimum 18)"
+                                           required />
+                                </div>
+                                @if (ageHasError)
+                                {
+                                    <span class="invalid-feedback d-block">@ViewData.ModelState["Age"].Errors[0].ErrorMessage</span>
+                                }
+                            </div>
+
+                            <!-- INCOME FIELD -->
+                            <div class="col-md-6 mb-3">
+                                <label for="Income" class="form-label">
+                                    <i class="bi bi-currency-dollar me-2"></i>Annual Income <span class="text-danger">*</span>
+                                </label>
+                                @{
+                                    var incomeHasError = ViewData.ModelState["Income"]?.Errors.Count > 0;
+                                }
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-wallet"></i></span>
+                                    <input type="number" 
+                                           class="form-control @(incomeHasError ? "is-invalid" : "")" 
+                                           id="Income" 
+                                           name="Income" 
+                                           value="@(Model?.Income)"
+                                           placeholder="Enter your annual income"
+                                           required />
+                                </div>
+                                @if (incomeHasError)
+                                {
+                                    <span class="invalid-feedback d-block">@ViewData.ModelState["Income"].Errors[0].ErrorMessage</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- CREDIT SCORE FIELD -->
+                            <div class="col-md-6 mb-3">
+                                <label for="CreditScore" class="form-label">
+                                    <i class="bi bi-star me-2"></i>Credit Score <span class="text-danger">*</span>
+                                </label>
+                                @{
+                                    var creditHasError = ViewData.ModelState["CreditScore"]?.Errors.Count > 0;
+                                }
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-graph-up"></i></span>
+                                    <input type="number" 
+                                           class="form-control @(creditHasError ? "is-invalid" : "")" 
+                                           id="CreditScore" 
+                                           name="CreditScore" 
+                                           value="@(Model?.CreditScore)"
+                                           placeholder="Enter credit score (300-900)"
+                                           required />
+                                </div>
+                                <small class="text-muted">Score should be between 300 and 900</small>
+                                @if (creditHasError)
+                                {
+                                    <span class="invalid-feedback d-block">@ViewData.ModelState["CreditScore"].Errors[0].ErrorMessage</span>
+                                }
+                            </div>
+
+                            <!-- LOAN AMOUNT FIELD -->
+                            <div class="col-md-6 mb-3">
+                                <label for="LoanAmount" class="form-label">
+                                    <i class="bi bi-cash me-2"></i>Loan Amount <span class="text-danger">*</span>
+                                </label>
+                                @{
+                                    var amountHasError = ViewData.ModelState["LoanAmount"]?.Errors.Count > 0;
+                                }
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-bank"></i></span>
+                                    <input type="number" 
+                                           class="form-control @(amountHasError ? "is-invalid" : "")" 
+                                           id="LoanAmount" 
+                                           name="LoanAmount" 
+                                           value="@(Model?.LoanAmount)"
+                                           placeholder="Enter loan amount"
+                                           required />
+                                </div>
+                                @if (amountHasError)
+                                {
+                                    <span class="invalid-feedback d-block">@ViewData.ModelState["LoanAmount"].Errors[0].ErrorMessage</span>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- LOAN DURATION FIELD -->
+                        <div class="mb-4">
+                            <label for="LoanDuration" class="form-label">
+                                <i class="bi bi-clock me-2"></i>Loan Duration (months) <span class="text-danger">*</span>
+                            </label>
+                            @{
+                                var durationHasError = ViewData.ModelState["LoanDuration"]?.Errors.Count > 0;
+                            }
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-calendar-event"></i></span>
+                                <input type="number" 
+                                       class="form-control @(durationHasError ? "is-invalid" : "")" 
+                                       id="LoanDuration" 
+                                       name="LoanDuration" 
+                                       value="@(Model?.LoanDuration)"
+                                       placeholder="Enter duration in months (minimum 1)"
+                                       required />
+                            </div>
+                            @if (durationHasError)
+                            {
+                                <span class="invalid-feedback d-block">@ViewData.ModelState["LoanDuration"].Errors[0].ErrorMessage</span>
+                            }
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-shield-check me-2"></i>Analyze Loan Risk
+                            </button>
+                            <small class="text-muted text-center">* All fields are required</small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PREDICTION RESULT -->
+            @if (ViewBag.Decision != null)
+            {
+                <div class="result-card @(ViewBag.Decision.ToString().Contains("Approve") ? "approved" : "rejected") fade-in mb-5">
+                    <div class="text-center mb-4">
+                        <div class="feature-icon mx-auto" style="width: 100px; height: 100px; font-size: 2.5rem;">
+                            <i class="bi @(ViewBag.Decision.ToString().Contains("Approve") ? "bi-check-lg" : "bi-x-lg")"></i>
+                        </div>
+                        <h3 class="mt-3">Risk Assessment Result</h3>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 bg-light rounded">
+                                <p class="mb-1 text-muted">Decision</p>
+                                <p class="mb-0 fw-bold" style="font-size: 1.5rem; color: @ViewBag.RiskColor;">
+                                    @ViewBag.Decision
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 bg-light rounded">
+                                <p class="mb-1 text-muted">Confidence Level</p>
+                                <div class="progress mt-2" style="height: 40px;">
+                                    @{
+                                        var confidenceValue = ViewBag.Confidence?.Replace("%", "") ?? "0";
+                                    }
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                         role="progressbar" 
+                                         style="width: @confidenceValue%; background: @ViewBag.RiskColor !important;" 
+                                         aria-valuenow="@confidenceValue" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                        @ViewBag.Confidence
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" onclick="resetForm()" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-arrow-clockwise me-2"></i>Check Another Application
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function resetForm() {
+        // Reset all form fields
+        document.querySelector('form').reset();
+        
+        // Remove the result card by reloading the page
+        window.location.href = '@Url.Action("Index")';
+    }
+</script>

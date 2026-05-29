@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="hero-section text-center fade-in">
+    <div class="container">
+        <h1><i class="bi bi-shield-check me-3"></i>Welcome to LoanRisk AI</h1>
+        <p class="mb-0">Advanced machine learning powered loan risk assessment system</p>
+    </div>
+</div>
+
+<div class="container fade-in">
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="bi bi-cpu"></i>
+                </div>
+                <h4>AI-Powered Analysis</h4>
+                <p class="text-muted">Our machine learning model analyzes multiple factors to provide accurate risk assessments.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+                <h4>Instant Results</h4>
+                <p class="text-muted">Get immediate loan risk predictions with confidence scores in real-time.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h4>Data-Driven Decisions</h4>
+                <p class="text-muted">Make informed lending decisions based on comprehensive data analysis.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <h2 class="mb-4">Ready to Assess Loan Risk?</h2>
+        <a asp-controller="Loan" asp-action="Index" class="btn btn-primary btn-lg">
+            <i class="bi bi-arrow-right-circle me-2"></i>Start Risk Assessment
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h4 class="card-title"><i class="bi bi-info-circle me-2"></i>How It Works</h4>
+                    <ol class="list-group list-group-numbered mt-3">
+                        <li class="list-group-item border-0">Enter applicant details (age, income, credit score)</li>
+                        <li class="list-group-item border-0">Provide loan information (amount, duration)</li>
+                        @* <li class="list-group-item border-0">Our AI model analyzes the data</li>
+                        <li class="list-group-item border-0">Receive instant risk assessment with confidence score</li> *@
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h4 class="card-title"><i class="bi bi-graph-up me-2"></i>Key Factors Analyzed</h4>
+                    <ul class="list-group mt-3">
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle text-success me-2"></i>Applicant Age</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle text-success me-2"></i>Annual Income</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle text-success me-2"></i>Credit Score</li>
+                        @* <li class="list-group-item border-0"><i class="bi bi-check-circle text-success me-2"></i>Loan Amount</li>
+                        <li class="list-group-item border-0"><i class="bi bi-check-circle text-success me-2"></i>Loan Duration</li> *@
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build folders
+bin/
+obj/
+Debug/
+Release/
+
+## ASP.NET Core
+appsettings.Development.json
+appsettings.Local.json
+
+## Logs
+logs/
+*.log
+
+## Rider / VS Code
+.idea/
+.vscode/
+
+## NuGet
+packages/
+*.nupkg
+
+## Node modules
+node_modules/
+
+## Windows
+Thumbs.db
+Desktop.ini
+
+## Mac
+.DS_Store
+
+## Temp files
+*.tmp
+*.temp
+
+## Publish
+publish/
+
+## IIS Express
+iisexpress/
+
+## SQL
+*.mdf
+*.ldf
+
+## Certificates / secrets
+*.pfx
+*.snk
+.env
+.env.*
+
+## Generated files
+wwwroot/uploads/
+wwwroot/temp/
+
