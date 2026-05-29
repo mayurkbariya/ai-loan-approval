@@ -18,14 +18,6 @@ An enterprise-grade loan risk assessment platform built with **ASP.NET Core 10.0
 ### Home Page
 ![Home Page](docs/screenshots/home-page.png)
 
-### Loan Assessment Form
-![Loan Assessment Form](docs/screenshots/loan-assessment-form.png)
-
-### Assessment Results
-| Low Risk (Approved) | Medium Risk (Review) | High Risk (Rejected) |
-
-| ![Low Risk](docs/screenshots/low-risk-result.png) | ![Medium Risk](docs/screenshots/medium-risk-result.png) | ![High Risk](docs/screenshots/high-risk-result.png) |
-
 ---
 
 ##  Architecture Overview
@@ -342,3 +334,12 @@ To retrain the model with updated data:
 ---
 
 *Developed with  using .NET & ML.NET*
+# Dashboard Preview
+
+<p align="center">
+   <img src="LoanWeb/images/high-risk-result.png" width="45%">
+   <img src="LoanWeb/images/home-page.png" width="45%">
+   <img src="LoanWeb/images/loan-assessment-form.png" width="45%">
+   <img src="LoanWeb/images/low-risk-result.png" width="45%">
+   <img src="LoanWeb/images/medium-risk-result.png" width="45%">
+</p>
